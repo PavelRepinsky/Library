@@ -1,0 +1,16 @@
+package com.petProject.config;
+
+import org.apache.kafka.clients.admin.NewTopic;
+import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.config.TopicBuilder;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AddBookResponseKafkaTopicConfig {
+
+    @Bean
+    public NewTopic wonderfulTopic() {
+        return TopicBuilder.name("WonderfulTopic")
+                .build();
+    }
+}

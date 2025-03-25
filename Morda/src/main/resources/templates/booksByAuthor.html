@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+    <title>Searching results</title>
+</head>
+<body>
+<h1>Books by author in stock:</h1>
+<form action="#" th:action="@{/library}" th:object="${books}"
+      method="post">
+    <fieldset>
+        <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Release year</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="book, itemStat : ${books}">
+                <td>
+                    <label>
+                        <input th:name="|books[${itemStat.index}].book name|" th:value="${book.getBookName()}"/>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input th:name="|books[${itemStat.index}].author|" th:value="${book.getAuthor()}"/>
+                    </label>
+                </td>
+                <td>
+                    <label>
+                        <input th:name="|books[${itemStat.index}].release year|" th:value="${book.getReleaseYear()}"/>
+                    </label>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+    <a href="/library/getBooks">Let's try again</a>
+    <a href="/library">Back to the main page</a>
+</form>
+</body>
+</html>

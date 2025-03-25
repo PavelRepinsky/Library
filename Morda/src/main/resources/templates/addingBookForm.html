@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Make the Village Library happy!</title>
+</head>
+<body>
+<h1>Do not be shy, put it to the bookshelf</h1>
+<!--/*@thymesVar id="AddedBook" type="org.example.payload.AddedBook"*/-->
+<form action="#" th:action="@{/library/addBook}" th:object="${addingBookForm}" method="post">
+  <p>Book name: <label>
+    <input type="text" th:field="*{bookName}"/>
+  </label></p>
+  <p>Author of book: <label>
+    <input type="text" th:field="*{author}"/>
+  </label></p>
+  <p>Book's release year: <label>
+    <input type="text" th:field="*{releaseYear}"/>
+  </label></p>
+  <p><input type="submit" value="Throw that book to a bookshelf"/></p>
+  <a href="/library">Back to the main page</a>
+</form>
+</body>
+</html>

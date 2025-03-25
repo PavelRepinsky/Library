@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Village Library - results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Hello there! What do you want?</h1>
+<form action="#" th:action="@{/library/getBooks}" method="get">
+    <p><input type="submit" value="Find books"/></p>
+</form>
+<form action="#" th:action="@{/library/addBook}" method="get">
+    <p><input type="submit" value="Add book to a library"/></p>
+</form>
+</body>
+</html>
