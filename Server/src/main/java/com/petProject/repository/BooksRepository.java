@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-//Maybe change to ListCrudRepository in future (not MVP)
 public interface BooksRepository extends CrudRepository<Books, Integer> {
 
     List<Books> findByAuthorIgnoreCase(String author);
