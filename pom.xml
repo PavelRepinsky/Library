@@ -16,7 +16,7 @@
 		<developer/>
 	</developers>
 	<modules>
-		<module>Morda</module>
+		<module>Client</module>
 		<module>Common</module>
 		<module>Adapter</module>
 		<module>Server</module>

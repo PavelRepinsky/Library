@@ -10,14 +10,14 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MordaGetBooksKafkaProducer {
+public class ClientGetBooksKafkaProducer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MordaGetBooksKafkaProducer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClientGetBooksKafkaProducer.class);
 
     private static KafkaTemplate<String, Author> kafkaTemplate;
 
-    public MordaGetBooksKafkaProducer(KafkaTemplate<String, Author> kafkaTemplate) {
-        MordaGetBooksKafkaProducer.kafkaTemplate = kafkaTemplate;
+    public ClientGetBooksKafkaProducer(KafkaTemplate<String, Author> kafkaTemplate) {
+        ClientGetBooksKafkaProducer.kafkaTemplate = kafkaTemplate;
     }
     public static void sendMessage(Author author) {
 

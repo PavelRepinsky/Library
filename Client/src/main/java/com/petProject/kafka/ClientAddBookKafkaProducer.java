@@ -10,15 +10,15 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MordaAddBookKafkaProducer {
+public class ClientAddBookKafkaProducer {
 
     private static final Logger LOGGER = LoggerFactory
-            .getLogger(MordaAddBookKafkaProducer.class);
+            .getLogger(ClientAddBookKafkaProducer.class);
 
     private static KafkaTemplate<AddedBook, AddedBook> addBookKafkaTemplate;
 
-    public MordaAddBookKafkaProducer(KafkaTemplate<AddedBook, AddedBook> addBookKafkaTemplate) {
-        MordaAddBookKafkaProducer.addBookKafkaTemplate = addBookKafkaTemplate;
+    public ClientAddBookKafkaProducer(KafkaTemplate<AddedBook, AddedBook> addBookKafkaTemplate) {
+        ClientAddBookKafkaProducer.addBookKafkaTemplate = addBookKafkaTemplate;
     }
 
     public static void sendMessage(AddedBook book) {

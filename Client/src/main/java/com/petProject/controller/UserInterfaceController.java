@@ -1,9 +1,9 @@
 package com.petProject.controller;
 
-import com.petProject.kafka.MordaAddBookKafkaProducer;
+import com.petProject.kafka.ClientAddBookKafkaProducer;
 import com.petProject.models.AddedBook;
 import com.petProject.models.Author;
-import com.petProject.kafka.MordaGetBooksKafkaProducer;
+import com.petProject.kafka.ClientGetBooksKafkaProducer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,7 +57,7 @@ public class UserInterfaceController {
 
         thread.start();
 
-        MordaGetBooksKafkaProducer.sendMessage(author);
+        ClientGetBooksKafkaProducer.sendMessage(author);
 
         try {
             String response = queue.take();
@@ -113,7 +113,7 @@ public class UserInterfaceController {
 
         thread.start();
 
-        MordaAddBookKafkaProducer.sendMessage(addedBook);
+        ClientAddBookKafkaProducer.sendMessage(addedBook);
 
         try {
             String response = queue.take();

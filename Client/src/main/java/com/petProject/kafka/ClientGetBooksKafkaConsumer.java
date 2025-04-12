@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import static com.petProject.controller.UserInterfaceController.*;
 
 @Service
-public class MordaGetBooksKafkaConsumer implements GetBooksKafkaConsumer {
+public class ClientGetBooksKafkaConsumer implements GetBooksKafkaConsumer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MordaGetBooksKafkaConsumer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClientGetBooksKafkaConsumer.class);
 
     @KafkaListener(topics = "HappyTopic", groupId = "secondGroup")
     public void consume(String message) {

@@ -12,9 +12,9 @@
 
     <groupId>com.petProject</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Morda</name>
+    <name>Client</name>
     <description>UI and connect with adapter module</description>
-    <artifactId>Morda</artifactId>
+    <artifactId>Client</artifactId>
 
     <dependencies>
         <dependency>

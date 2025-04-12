@@ -1,23 +1,60 @@
 Library v1.0
 
-Проект состоит из четырёх модулей, каждый модуль имеет свою функцию:
+This project consists of four modules, each with its own functionality:
 
-Модуль 'Morda' отвечает за пользовательский интерфейс, благодаря которому пользователь может выбрать интересующее его действие:
-1. Посмотреть, какие книги есть в наличии;
-2. Добавить в библиотеку свою книгу;
+#### Client Module (UI)
+The 'Client' module handles the user interface (UI), allowing users to choose between two actions:
+1. Search for books in stock
+2. Add a book to the library
 
-Модуль имеет продюсера и консюмера Kafka.
-В случае, если пользователь желает посмотреть, какие книги есть в наличии, то ему будет предложено ввести фамилию автора, книги которого его интересуют. После того как информация об авторе будет получена, продюсером будет произведена отправка сообщения в топик LuckyTopic.
-Консюмер слушает топик HappyTopic, из которого ожидает вычитать сообщение со списком имеющихся в наличии книг. После вычитки сообщение парсится при помощи BookParser и отображается пользователю в виде таблицы.
-Если же пользователь желает добавить книгу в библиотеку, то ему будет предложено ввести в форму автора добавляемой книги, её название и год публикации. После подтверждения продюсер отправит сообщение в топик BeautifulTopic.
-Консюмер слушает топик WonderfulTopic из которого ожидает вычитать информацию об успехе добавления книги.
+This module includes a Kafka consumer and a Kafka producer.
 
-Модуль ‘Server’ отвечает за выполнение CRUD-операций, коими являются получение списка имеющихся книг и добавление новых.
+- Case 1: Searching for books
+    - The UI provides an "Author" field where the user enters the last name of the desired author.
+    - Upon submission, the producer sends a message to the "LuckyTopic" topic.
+    - The consumer listens to the "HappyTopic" for a response containing the list of available books by the specified author.
+    - The received message is parsed by BookParser, and the UI displays the results in a table.
 
-Модуль ‘Adapter’ выступает в роли адаптера, который позволяет модулю ‘Morda’ общаться с модулем ‘Server’.
-В случае получения списка имеющихся книг модуль слушает LuckyTopic, получает из него информацию об авторе, по которому пользователь желает увидеть список имеющихся книг и осуществляет GET-запрос при помощи RestClient. Адаптер направляет полученную информацию в топик HappyTopic.
-Так же адаптер слушает BeautifulTopic, который используется для получения информации по добавляемой в БД книге. Получив информацию, адаптер осуществляет POST-запрос при помощи всё того же RestClient. Затем результаты операции передаются продюсером в топик WonderfulTopic.
+- Case 2: Adding a new book
+    - The UI provides input fields for the author’s last name, book title, and release year.
+    - After submission, the producer sends a message to the "BeautifulTopic" topic.
+    - The consumer listens to the "WonderfulTopic" for a status message (success or error).
 
-Также в проекте присутствует модуль Common, который содержит 2 класса:
-1. Класс AddedBook представляет собой POJO для книг, которые будут искомы или добавляемы пользователем.
-2. Класс Author используется для передачи информации об авторе для поиска книг в базе данных. 
+#### Server Module (CRUD Operations)
+This module manages database interactions, including:
+- Adding books to the database.
+- Retrieving books for display.
+
+#### Adapter Module
+Acts as a bridge between 'Client' and 'Server'.
+
+- Case 1 (Searching for books):
+    - The adapter’s consumer listens to "LuckyTopic" for the author’s last name.
+    - It then sends a POST request via RestClient to the 'Server'.
+    - The response (list of books) is sent as a message to "HappyTopic".
+
+- Case 2 (Adding a book):
+    - The adapter’s consumer listens to "BeautifulTopic" for book details.
+    - It sends a POST request to the 'Server'.
+    - The operation result (success/failure) is sent to "WonderfulTopic".
+
+#### Common Module (Shared Classes)
+Contains two key classes:
+1. AddedBook – A POJO representing books to be added or retrieved.
+2. Author – Used for searching books in the database.
+
+---
+
+### How to Run the Project
+1. Clone the repository: 'git clone https://github.com/PavelRepinsky/Library.git'
+2. Start a Kafka Server on an available port (using Docker or another method).
+3. Configure VM Options for 'Client' and 'Adapter' modules:
+   In IntelliJ IDEA:
+    - Go to Run/Debug Configurations.
+    - Click Edit Configurations
+    - Select the module → Modify Options → Add VM Options.
+    - In appeared field 'VM Options' enter: -Dserver.port=<port_number>
+
+(Optional: The same can be done for the 'Server' module if needed.)
+
+That’s all! Enjoy using the Library application.  
