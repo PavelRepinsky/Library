@@ -46,15 +46,16 @@ Contains two key classes:
 ---
 
 ### How to Run the Project
-1. Clone the repository: 'git clone https://github.com/PavelRepinsky/Library.git'
-2. Start a Kafka Server on an available port (using Docker or another method).
+1. Clone the repository: 'git clone https://github.com/PavelRepinsky/Library.git';
+2. Start a Kafka Server on an available port (using Docker or another method);
 3. Configure VM Options for 'Client' and 'Adapter' modules:
    In IntelliJ IDEA:
     - Go to Run/Debug Configurations.
     - Click Edit Configurations
     - Select the module → Modify Options → Add VM Options.
     - In appeared field 'VM Options' enter: -Dserver.port=<port_number>
-
-(Optional: The same can be done for the 'Server' module if needed.)
+(Optional: The same can be done for the 'Server' module if needed.);
+4. Run project via IDEA;
+5. Open localhost in browser (127.0.0.1);
 
 That’s all! Enjoy using the Library application.  
